@@ -1,0 +1,63 @@
+server:
+  host: 0.0.0.0
+  port: 8443
+  cert: certs/cert.pem
+  key: certs/key.pem
+  cert_download_port: 8080
+tier: auto
+target_latency_ms: 700.0
+hardware:
+  vram_high_mb: 20480
+  vram_mb: 12288
+  vram_light_mb: 7168
+  force_cpu: false
+detector:
+  backend: ultralytics
+  weights: yolov8s-worldv2.pt
+  classes:
+  - Yellow ball
+  imgsz: 1280
+  conf: 0.1
+  iou: 0.5
+  max_det: 500
+  half: auto
+  tile:
+    enabled: false
+    trigger_size: 1600
+    size: 640
+    overlap: 0.2
+  classical:
+    diff_thresh: 25
+    min_area: 60
+    max_area: 20000
+    morph_kernel: 7
+preprocess:
+  normalize_brightness: false
+  roi:
+  - - 0.09621212121212121
+    - 0.10198863636363632
+  - - 0.9606060606060606
+    - 0.10198863636363632
+  - - 0.9606060606060606
+    - 0.8021306818181818
+  - - 0.09621212121212121
+    - 0.8021306818181818
+tracker:
+  type: bytetrack
+  track_high_thresh: 0.35
+  track_low_thresh: 0.1
+  new_track_thresh: 0.4
+  match_thresh: 0.8
+  track_buffer_seconds: 2.0
+  iou_expand_ratio: 0.3
+  distance_penalty: 0.3
+  std_weight_position: 0.05
+  std_weight_velocity: 0.00625
+change_detect:
+  enabled: true
+  change_thresh: 2.0
+  force_detect_interval_s: 3.0
+counting:
+  stable_frames: 5
+capture:
+  save_dir: captures

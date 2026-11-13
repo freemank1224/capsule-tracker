@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# 模型权重(体积大,首次运行自动下载;CLIP 用 scripts/download_clip.py)
+*.pt
+weights/
+
+# 证书私钥 —— 绝不入库
+certs/
+
+# 实拍采集数据
+captures/
+
+# 运行产物
+*.log
+.DS_Store
+Thumbs.db

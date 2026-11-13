@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>胶囊计数</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="stage">
+  <video id="video" playsinline muted autoplay></video>
+  <canvas id="overlay"></canvas>
+
+  <!-- 顶部状态栏 -->
+  <div id="statusbar">
+    <span id="st-conn" class="chip warn">未连接</span>
+    <span id="st-fps" class="chip">-- FPS</span>
+    <span id="st-lat" class="chip">-- ms</span>
+    <span id="st-tier" class="chip">--</span>
+    <span id="st-count" class="chip big">计数 --</span>
+    <span id="st-stable" class="chip hidden">已稳定</span>
+    <span id="st-torch" class="chip hidden">🔦</span>
+  </div>
+
+  <!-- 设置 ROI 提示 -->
+  <div id="roi-hint" class="hidden">在画面上拖拽框选托盘区域,松手后自动保存</div>
+
+  <!-- 屏幕补光全白遮罩 -->
+  <div id="light-mask" class="hidden">
+    <div id="light-exit">点击任意处关闭补光</div>
+  </div>
+
+  <!-- 控制面板(底部抽屉) -->
+  <div id="panel">
+    <div id="panel-toggle">▲ 设置</div>
+    <div id="panel-body" class="hidden">
+      <div class="row">
+        <label>上传 FPS <b id="v-fps">5</b></label>
+        <input type="range" id="ctl-fps" min="1" max="15" step="1" value="5">
+      </div>
+      <div class="row">
+        <label>JPEG 质量 <b id="v-q">0.75</b></label>
+        <input type="range" id="ctl-q" min="0.5" max="0.95" step="0.05" value="0.75">
+      </div>
+      <div class="row">
+        <label>上传宽度</label>
+        <select id="ctl-width">
+          <option value="960">960</option>
+          <option value="1280" selected>1280</option>
+          <option value="1920">1920</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>检测置信度 <b id="v-conf">0.25</b></label>
+        <input type="range" id="ctl-conf" min="0.05" max="0.9" step="0.05" value="0.25">
+      </div>
+      <div class="row">
+        <label>目标类别(Zero-shot)</label>
+        <input type="text" id="ctl-classes" placeholder="capsule, pill" value="capsule, pill">
+      </div>
+      <div class="btns">
+        <button id="btn-reset">重置计数</button>
+        <button id="btn-roi">设置 ROI</button>
+        <button id="btn-roi-clear">清除 ROI</button>
+        <button id="btn-capture">保存当前帧</button>
+        <button id="btn-torch" class="hidden">开灯</button>
+        <button id="btn-light">屏幕补光</button>
+      </div>
+      <div id="panel-msg"></div>
+    </div>
+  </div>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

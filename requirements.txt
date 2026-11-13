@@ -1,0 +1,18 @@
+fastapi
+uvicorn[standard]
+numpy
+scipy
+opencv-python-headless
+pydantic>=2
+pyyaml
+qrcode
+pytest
+ultralytics          # 默认后端: YOLO-World zero-shot / 自训练模型 (AGPL-3.0)
+
+# ---- PyTorch ----
+# CUDA 版 PyTorch 不在本文件中安装: 版本必须 >= 12.8(RTX 50 系硬性要求),
+# 见 README"PyTorch 安装";已有环境(如 ComfyUI python_embeded)可直接复用,零下载。
+
+# ---- 可选后端(按需手动安装,勿同时安装互斥包) ----
+# onnxruntime        # onnx_det 后端 CPU;GPU 用户装 onnxruntime-gpu(与 onnxruntime 不可共存)
+# openvino           # openvino_det 后端 (可选)
